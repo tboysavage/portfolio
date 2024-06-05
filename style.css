@@ -40,7 +40,7 @@ body{
 .panel {
     background-color: #000; /* Solid black background color */
     border-radius: 20px; /* Adjust the border-radius for rounded corners */
-    height: 90%;
+    height: 60%;
     width: 50%; /* Set to 50% for the left half */
     position: absolute;
     left: 20px;
