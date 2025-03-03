@@ -2,174 +2,641 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Tanatswa Mapfumo</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+    <title>Tanatswa Mapfumo - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/42479cb17c.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #34495e;
+            --accent-color: #534f8c;
+            --light-color: #f5f5f5;
+            --dark-color: #000000;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.8;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+       h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 1.5rem;
+        }
+
+        .nav-links a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .name_animation{
+            color: #534f8c;
+            animation: animate 3s linear infinite;
+        }
+        @keyframes animate
+        {
+            0%
+            {
+                color: #534f8c;
+                text-shadow: none;
+            }
+            18.1%,20.1%,50.1%,60%,65.1%,80%,90.1%,92.1%,100%{
+                color: #fff;
+                text-shadow: 0 0 10px #b2adff,
+                0 0 20px #b2adff,
+                0 0 40px #b2adff,
+                0 0 80px #b2adff,
+                0 0 160px #b2adff,
+                0 0 520px #b2adff,
+                0 0 1040px #b2adff;
+
+            }
+
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url("hero-img.png");
+            background-size: cover;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 0 ;
+        }
+        .project_img{
+            height: 40%;
+            width: auto;
+            border-radius: 5%;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 0;
+            gap: 30px;
+            scrollbar-width: none;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .experience-card,
+        .project-card,
+        .education-card {
+            flex: 0 0 90%;
+            scroll-snap-align: start;
+            background: whitesmoke;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            max-height: 80vh;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 100;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+
+        .carousel-nav.prev { left: -20px; }
+        .carousel-nav.next { right: -20px; }
+
+        /* Education Section */
+        .education {
+            display: grid;
+            place-items: center; /* Centers both horizontally & vertically */
+            text-align: center;
+        }
+        .education-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .education-card p {
+            margin-bottom: 10px;
+        }
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            height: 500px; /* Set the height of the container */
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            opacity: 0; /* Hidden initially */
+            animation: fadeIn 2s forwards, float 30s ease-in-out infinite;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            cursor: pointer; /* Show pointer cursor on hover */
+            transform-origin: center center; /* Zoom from the center */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            10% {
+                transform: translate(100px, -50px);
+            }
+            20% {
+                transform: translate(-50px, 120px);
+            }
+            30% {
+                transform: translate(200px, -80px);
+            }
+            40% {
+                transform: translate(-150px, 200px);
+            }
+            50% {
+                transform: translate(180px, -150px);
+            }
+            60% {
+                transform: translate(250px, 100px);
+            }
+            70% {
+                transform: translate(220px, -50px);
+            }
+            80% {
+                transform: translate(-180px, -120px);
+            }
+            90% {
+                transform: translate(150px, 150px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+    .skill-category.selected {
+        transform: scale(1.2) translateZ(100px); /* Zoom and bring forward */
+        z-index: 10; /* Ensure the selected tile is above others */
+        background-color: #6c3d6d;
+    }
+    .skill-category.stop-floating {
+        animation: none; /* Stop the floating animation */
+        transform: translate(0, 0); /* Keep it in its current position */
+    }
+
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .social-icons{
+            margin-top: 30px;
+        }
+        .social-icons a{
+            text-decoration: none;
+            font-size: 50px;
+            margin-right: 15px;
+            color: #ababab;
+            display: inline-block;
+            transition: transform 0.5s;
+        }
+        .social-icons a:hover{
+            color: #534f8c;
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .carousel { flex: 0 0 80%; }
+            .carousel-container { padding: 0 20px; }
+            .carousel-nav { width: 30px; height: 30px; }
+        }
+    </style>
 </head>
 <body>
-    <script src="script.js"></script>
-    <div id="header">
-        <div class="panel">
-            <nav>
-                <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fas fa-times" onclick="closemenu()"></i>
-                </ul>
-                <i class="fas fa-bars" onclick="openmenu()"></i>
-            </nav>
-            <div class="header-text">
-                <p>Software Developer</p>
-                <h1>Hi, I'm <span class="name_animation">Tanatswa</span><br> Welcome to my <br>website</h1>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi I'm <span class="name_animation">Tanatswa.</span><br>Welcome to my
+                website</h1>
+            <p>Full-Stack Developer & AI Engineer</p>
+            <div class="social-links">
+                <a href="https://github.com/tboysavage" target="_blank" class="cta-btn">GitHub</a>
+                <a href="https://www.linkedin.com/in/tanatswa-mapfumo-70ba69227" target="_blank" class="cta-btn">LinkedIn</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-------------About Section------------------>
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1">
-                    <img src="images/dark.jpg" alt="Profile Image">
+    <section id="experience" class="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="carousel-container">
+            <div class="carousel" id="experienceCarousel">
+                <!-- Experience Cards -->
+                <div class="experience-card">
+                    <h3 class="role-title">Software Engineer, Intern</h3>
+                    <p class="company-name">Hogarth Worldwide (Madrid, Spain)</p>
+                    <img src="hogarth_logo.jpg" alt="">
+                    <p class="duration">May 2024 - Dec 2024</p>
+                    <ul class="responsibilities">
+                        <p>Designed and developed user-friendly interfaces using React.js, styled components with Bootstrap and Tailwind CSS.</p>
+                        <p>Implemented robust server-side logic and RESTful APIs with Node.js and Express.js, ensuring high performance.</p>
+                        <p>Optimized database operations and query performance in MySQL, improving overall system efficiency.</p>
+                        <p>Automated deployment pipelines using Docker containers and orchestrated workflows with Kubernetes.</p>
+                        <p>Worked with server instances on AWS EC2 and managed APIs on AWS Lambda along with development on Cloud9.</p>
+                        <p>Actively contributed to DevOps practices, including setting up CI/CD pipelines with GitHub Actions to streamline development and deployment processes.</p>
+                        <p>Integrated WordPress for content management, enabling easy client updates and customization.</p>
+                    </ul>
                 </div>
-                <div class="about-col-2">
-                    <h1 class="sub-title">About Me</h1>
-                    <p>
-                        I am a recent Computer Science graduate with a passion for full-stack development, artificial intelligence, and software engineering. 
-                        I recently completed my internship at Hogarth Worldwide, I contributed to building scalable and user-centric web applications. 
-                        I specialize in programming, modern frameworks, and cloud technologies, and I excel in problem-solving with innovative solutions.
-                    </p>
-                    <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('Skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('Experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('Education')">Education</p>
-                    </div>
-                    <div class="tab-contents active-tab" id="Skills">
-                        <ul>
-                            <li><span>Programming Languages:</span> Python, JavaScript, C++, Java</li>
-                            <li><span>Web Development:</span> React.js, Node.js, HTML, CSS</li>
-                            <li><span>Machine Learning:</span> TensorFlow, Scikit-learn, OpenCV</li>
-                            <li><span>Databases:</span> MySQL, PostgreSQL, MongoDB</li>
-                            <li><span>Version Control:</span> Git, GitHub</li>
-                            <li><span>Operating Systems:</span> Linux (Debian-based, Ubuntu), Windows</li>
-                            <li><span>Networking:</span> Basic routing, TCP/UDP mechanisms, ICMP control</li>
-                            <li><span>Cloud Technologies:</span> AWS (Lambda, S3, EC2)</li>
-                            <li><span>Software Development:</span> Agile methodologies, testing (unit, integration, system)</li>
-                            <li><span>Tools:</span> Docker, Visual Studio Code, IntelliJ IDEA</li>
-                            <li><span>AI & Data Analysis:</span> Data preprocessing, exploratory data analysis</li>
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="Experience">
-                        <ul>
-                            <li><span>Software Engineer</span><br>Hogarth Worldwide - Developed and optimized web applications</li>
-                            <li><span>Academic Projects</span><br>Created AI-based and full-stack solutions</li>
-                            <li><span>AI Developer</span><br>Proceedit - Developed and trained AI models</li>
-
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="Education">
-                        <ul>
-                            <li><span>BSc in Computer Science</span><br>University of Debrecen, Hungary</li>
-                        </ul>
-                    </div>
+                <div class="experience-card">
+                    <h3 class="role-title">Web Developer, Intern</h3>
+                    <p class="company-name">Lime Light Renhold AS (Oslo, Norway)</p>
+                    <img src="lime-logo.jpg" alt="">
+                    <p class="duration">April 2024 - June 2024</p>
+                    <ul class="responsibilities">
+                        <p>Developed responsive websites using HTML5, CSS3, and JavaScript for optimal user experience across devices.</p>
+                        <p>Enhanced interactivity with jQuery and AJAX, ensuring dynamic content loading.</p>
+                        <p>Optimized site performance through image compression, lazy loading, and minification techniques.</p>
+                    </ul>
                 </div>
+                <div class="experience-card">
+                    <h3 class="role-title">Artificial Intelligence Developer, Intern</h3>
+                    <p class="company-name">Expertel S.A Proceedit (Barcelona, Spain)</p>
+                    <img src="proceedit-logo.jpg" alt="">
+                    <p class="duration">Sept 2023 - June 2024</p>
+                    <ul class="responsibilities">
+                        <p>Developed machine learning models using TensorFlow and scikit-learn for data analysis and predictive analytics.</p>
+                        <p>Deployed server instances on AWS EC2 and managed storage with S3.</p>
+                        <p>Built and tested GraphQL and REST APIs for seamless data integration.</p>
+                        <p>Maintained SQL databases on PostgreSQL to optimize data handling and performance.</p>
+                        <p>Worked in an Agile environment using JIRA and Confluence for task management and documentation.</p>
+                    </ul>
+                </div>
+                <!-- Add more experience cards -->
             </div>
+            <div class="carousel-nav prev" onclick="scrollCarousel('experienceCarousel', -300)">❮</div>
+            <div class="carousel-nav next" onclick="scrollCarousel('experienceCarousel', 300)">❯</div>
         </div>
-    </div>
+    </section>
 
-    <!----------------Services Section------------->
-    <div id="services">
-        <div class="container">
-            <h1 class="sub-title">My Services</h1>
-            <div class="services-list">
-                <div>
-                    <i class="fa-solid fa-code"></i>
-                    <h2>Web Development</h2>
-                    <p>Building interactive websites using modern technologies.</p>
+    <section id="projects" class="projects">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="carousel-container">
+            <div class="carousel" id="projectCarousel">
+                <!-- Project Cards -->
+                <div class="project-card">
+                    <h2>AI-Driven Cancer Subtype Classification</h3>
+                    <img class="project_img" src="cancercell.jpg" alt="">
+                    <p>Developed ML model with TensorFlow and Python for ovarian cancer subtype classification.</p>
+                    <ul>
+                        <p>Implemented preprocessing pipelines using NumPy, Pandas, and scikit-learn.</p>
+                        <p>Used deep learning architectures (CNNs, RNNs) for feature extraction.</p>
+                        <p>Deployed model for inference using Flask.</p>
+                        <p>Optimized model accuracy with Keras and hyperparameter tuning.</p>
+                        <p>Visualized results with Matplotlib and Seaborn.</p>
+                    </ul>
+                    <p>Technologies Used: TensorFlow, Python, NumPy, Pandas, scikit-learn, CNNs, RNNs, Flask, Keras, Matplotlib, Seaborn</p>
                 </div>
-                <div>
-                    <i class="fa-brands fa-uncharted"></i>
-                    <h2>Software Engineering</h2>
-                    <p>Designing and developing innovative software applications.</p>
+        
+                <!-- Marble Game -->
+                <div class="project-card">
+                    <h2>Marble Game</h3>
+                    <img class="project_img" src="game-icon.png" alt="">
+                    <p>Led a team to develop a physics-based marble balancing game on Unity using a reinforcement learning model.</p>
+                    <ul>
+                        <p>Used Unity ML-Agents for model training and gameplay AI.</p>
+                        <p>Integrated Unity's Physics Engine for realistic mechanics and designed reward systems to optimize agent performance.</p>
+                        <p>Created 3D assets using Blender and imported into Unity. Deployed models via ONNX for real-time inference.</p>
+                        <p>Explored Q-Learning and DDPG for efficient solutions. Optimized performance with C# scripting for smooth gameplay.</p>
+                    </ul>
+                    <p>Technologies Used: Unity, ML-Agents, Python, TensorFlow, PyTorch, Blender, ONNX, C#, Q-Learning, DDPG</p>
                 </div>
-                <div>
-                    <i class="fa-solid fa-brain"></i>
-                    <h2>AI Solutions</h2>
-                    <p>Implementing cutting-edge AI and machine learning models.</p>
+        
+                <!-- Portfolio Website -->
+                <div class="project-card">
+                    <h2>Portfolio Website</h3>
+                    <img class="project_img" src="portfolio.png" alt="">
+                    <p>Designed and developed a personal portfolio website MERN stack to showcase projects and skills.</p>
+                    <ul>
+                        <p>Built the frontend with HTML5, CSS3, and JavaScript, ensuring a responsive design.</p>
+                        <p>Integrated animations and interactive elements using React.js and GSAP.</p>
+                        <p>Deployed the site on GitHub Pages for easy access and updates.</p>
+                        <p>Embedded project details, code repositories, and contact forms with REST API integration.</p>
+                    </ul>
+                    <p>Technologies Used: HTML5, CSS3, JavaScript, React.js, GSAP, GitHub Pages, Netlify</p>
                 </div>
+                <!-- Add more project cards -->
             </div>
+            <div class="carousel-nav prev" onclick="scrollCarousel('projectCarousel', -300)">❮</div>
+            <div class="carousel-nav next" onclick="scrollCarousel('projectCarousel', 300)">❯</div>
         </div>
-    </div>
+    </section>
 
-    <!------------Portfolio Section------------->
-    <div id="portfolio">
-        <div class="container">
-            <h1 class="sub-title">My Work</h1>
-            <div class="work-list">
-                <div class="work">
-                    <img src="images/youtube.png" alt="YouTube Clone">
-                    <div class="layer">
-                        <h3>AI cancer subtype classifier</h3>
-                        <p>An AI model used to classify various subtypes of ovarian cancer</p>
-                        <a href="https://github.com/tboysavage/AI-cancer-subtype-classifier"><i class="fa-solid fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="images/uno.png" alt="UNO Detection">
-                    <div class="layer">
-                        <h3>UNO Card Detection</h3>
-                        <p>Python OpenCV project with TensorFlow for image processing.</p>
-                        <a href="https://github.com/tboysavage"><i class="fa-solid fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="images/linux.jpg" alt="Linux Distro">
-                    <div class="layer">
-                        <h3>AT-game</h3>
-                        <p>Unity marble game with trained AI model to solve it.</p>
-                        <a href="https://github.com/tboysavage/AT-game"><i class="fa-solid fa-link"></i></a>
-                    </div>
-                </div>
-            </div>
-            <a href="https://github.com/tboysavage" class="btn">See More</a>
-        </div>
-    </div>
-
-    <!------------------Contact Section------------->
-    <div id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="sub-title">Contact Me</h1>
-                    <p><i class="fa-solid fa-paper-plane"></i> temstartech@gmail.com</p>
-                    <p><i class="fa-solid fa-phone"></i> +36 70 577 7525</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/profile.php?id=100077075483463"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://github.com/tboysavage"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/tanatswa-mapfumo-70ba69227/"><i class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                    <a href="images/Tanatswa_Mapfumo_Resume.pdf" download class="btn btn2">Download CV</a>
-                </div>
-                <div class="contact-right">
-                    <form name="submit-to-google-sheet">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="Email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                        <button type="submit" class="btn btn2">Submit</button>
-                    </form>
-                    <span id="msg"></span>
+    <section id="education" class="education">
+        <h2 class="section-title">Education</h2>
+        <div class="carousel-container">
+            <div class="carousel-container">
+                <a href="https://unideb.hu/">
+                    <div class="education-card">
+                    <h2>Bachelor of Science in Computer Science</h3>
+                    <h4>University of Debrecen</h4>
+                </a>
+                    <img src="debrecen-uni.png" alt="">
+                    <p>2021 - 2025</p>
+                    <p>Programming, Operating Systems, Calculus, Networks, Database Systems, Data Structures and Algorithms, Cloud Computing, Web Technologies, Software Engineering, Artificial Intelligence, Cyber Security, Image Processing, Web Application Development, Software Development, Software Testing.</p>
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <p>Copyright © 2025. Made by Tanatswa Mapfumo</p>
+    </section>
+
+    <section id="skills" class="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Web Development</h3>
+                <p>React.js, Vue.js, TypeScript, HTML5, CSS3, SCSS, Node.js, Express.js</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Development Processes</h3>
+                <p>CI/CD pipelines, Agile</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <p>Python, R, Java, C++, JavaScript, PHP</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Web Services</h3>
+                <p>Proficient in RESTful APIs, GraphQL, SOAP</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <p>SQL (MySQL, PostgreSQL, MongoDB), NoSQL</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Cloud</h3>
+                <p>AWS (VPC, EC2, IAM, ECS, S3, API Gateway, Lambda, RDS)</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Containerization</h3>
+                <p>Docker, Kubernetes (EKS), ECS</p>
+            </div>
+        
+            <div class="skill-category">
+                <h3>Version Control and CI/CD</h3>
+                <p>Git, GitHub, Jenkins</p>
+            </div>
+            
+            <!-- Add more skill categories -->
         </div>
-    </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="cta-btn">Send Message</button>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100077075483463"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://github.com/tboysavage"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/tanatswa-mapfumo-70ba69227/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <a href="images/Tanatswa_Mapfumo_Resume.pdf" download class="btn btn2">Download CV</a>
+        </form>
+    </section>
+
+    <footer>
+        <p>📧 Tanatswaephraim@gmail.com | © 2024 Tanatswa Mapfumo</p>
+        <p><a href="https://tboysavage.github.io/portfolio">View Full Portfolio</a></p>
+    </footer>
+
+    <script>
+        function scrollCarousel(carouselId, offset) {
+            const carousel = document.getElementById(carouselId);
+            carousel.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            carousel.addEventListener('touchstart', e => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            carousel.addEventListener('touchend', e => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                if(Math.abs(diff) > 50) {
+                    carousel.scrollBy({ left: diff > 0 ? 300 : -300, behavior: 'smooth' });
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const skillCategories = document.querySelectorAll(".skill-category");
+            const skillsGrid = document.querySelector(".skills-grid");
+            const gridWidth = skillsGrid.clientWidth;
+            const gridHeight = skillsGrid.clientHeight;
+
+            skillCategories.forEach(category => {
+                // Generate random initial positions
+                const randomX = Math.random() * (gridWidth - 200); // 200 is the max width of the tile
+                const randomY = Math.random() * (gridHeight - 100); // 100 is the max height of the tile
+
+                // Set the random position for initial placement
+                category.style.left = `${randomX}px`;
+                category.style.top = `${randomY}px`;
+
+                // Assign a random animation delay for each tile
+                const randomDelay = Math.random() * 5; // Randomize delay to start animations differently
+                category.style.animationDelay = `${randomDelay}s`;
+
+                // Add click event listener to handle zoom-in effect
+                category.addEventListener("click", () => {
+                    // Remove 'selected' class from all other tiles
+                    skillCategories.forEach(skill => skill.classList.remove("selected"));
+
+                    // Add 'selected' class to the clicked tile
+                    category.classList.add("selected");
+
+                    // Optional: You could also add some effect to the clicked tile to make it reset after a while
+                    setTimeout(() => {
+                        category.classList.remove("selected");
+                    }, 3000); // After 3 seconds, remove the zoom effect
+                });
+            });
+        });
+
+
+    </script>
 </body>
 </html>
